@@ -1,18 +1,21 @@
 const app = Vue.createApp({        //Initialize vue app
     data: function first() {    
         return {
-            message: 'Finish the course and learn vue!!',
+            CourseGoalA: 'Finish the course and learn vue!!',
+            CourseGoalB: 'Master the course and build apps',
             //You can put any name instead of message but the data
             // name cannot be changed
             vuelink: 'https://www.google.com' 
         } 
     },
-    methods: function randomGenerator(){
-        const randomNumber = Math.random()
-        if (randomNumber > 0.5){
-            return "learn Vue";
-        }else{
-            return "Master Vue";
+    methods: {
+        randomGenerator(){
+            const randomNumber = Math.random()
+            if (randomNumber > 0.5){
+                return this.CourseGoalA;
+            }else{
+                return this.CourseGoalB;
+            }
         }
     }     
 })
