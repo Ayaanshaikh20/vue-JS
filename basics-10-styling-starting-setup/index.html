@@ -16,10 +16,18 @@
     <header>
       <h1>Vue Dynamic Styling</h1>
     </header>
+    <!-- <section id="styling">
+      <div class="demo" :style="{'borderColor': boxASelected ? 'red' : '#ccc' }" @click="boxselected('A')"></div>
+      <div class="demo" :style="{'borderColor': boxBSelected ? 'red' : '#ccc' }" @click="boxselected('B')"></div>
+      <div class="demo" :style="{'borderColor': boxCSelected ? 'red' : '#ccc' }" @click="boxselected('C')"></div>
+    </section> -->
+
+    <!--:class has a object that has the class name from css file that is active which will run if boxAselected is true-->
+
     <section id="styling">
-      <div class="demo"></div>
-      <div class="demo"></div>
-      <div class="demo"></div>
+      <div class="demo" :class="boxAClasses" @click="boxselected('A')"></div>
+      <div class="demo" :class="boxBClasses" @click="boxselected('B')"></div>
+      <div class="demo" :class="boxCClasses" @click="boxselected('C')"></div>
     </section>
   </body>
 </html>
