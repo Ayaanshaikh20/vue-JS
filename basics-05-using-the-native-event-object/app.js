@@ -5,9 +5,26 @@ const app = Vue.createApp({
       name: ''
     };
   },
+  watch: {
+    counter(value) {
+      if(value>50){
+        this.counter = 0
+      }
+    }
+  },
+  computed: {
+    fullname() {
+      if(this.name === ""){
+        return '';
+      }
+      else{
+        return this.name + ' ' + 'Shaikh';
+      }
+    },
+  },
   methods: {
-    setName(event, lastName) {
-      this.name = event.target.value + ' ' + lastName;
+    setName(event) {
+      this.name = event.target.value;
     },
     add(num) {
       this.counter = this.counter + num;
@@ -15,6 +32,9 @@ const app = Vue.createApp({
     reduce(num) {
       this.counter = this.counter - num;
       // this.counter--;
+    },
+    resetName() {
+      this.name = '';
     }
   }
 });
