@@ -9,11 +9,11 @@ const app = Vue.createApp({
   methods: {
     addGoals() {
       console.log('Ayaan')
-      this.goals.push(this.enteredgoalname);
-      this.enteredgoalname = '';
+      this.goals.push(this.enteredgoalname); //this will push the typed goals into the array goals
+      this.enteredgoalname = '';             //this sets enteredgoalname input text back to empty
     },
     removeGoals(indx) {
-      this.goals.splice(indx, 1)
+      this.goals.splice(indx, 1)             //splice would delete the selected goal from the goals array
     }
   }
 });

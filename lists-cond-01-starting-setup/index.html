@@ -18,12 +18,19 @@
     </header>
     <section id="user-goals">
       <h2>My course goals</h2>
+      
+      <!--@keyup is another event listner that would capture each key pressed on the keyboard and 
+      also takes a function addgoals where we push the goal .enter is the key that can be used to submit the goal-->
       <input type="text" v-model="enteredgoalname" @keyup.enter="addGoals($event)"/>
+      
+      <!--as we click the button the click event listner will initiate the addGoals-->
       <button @click="addGoals($event)">Add Goal</button>
       <p v-if="goals.length===0">No goals have been added yet - please start adding some!</p>
       <ul v-else>
-        <li v-for="(goal, index) in goals" :key="goal" @click="removeGoals($event)">
-        <p>{{ goal }} - {{ index }}</p>
+        
+        <!--@click is an event listner that would listen to the function removeGoals that uses splice()-->
+        <li v-for="(goal, index) in goals" :key="goal" @click="removeGoals($event)">      
+        <p>{{ goal }} - {{ index }}</p>                                                    
         <input type="text" @click.stop>
         </li>
       </ul>
