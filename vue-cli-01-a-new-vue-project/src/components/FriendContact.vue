@@ -1,12 +1,15 @@
 <template>
     <li>
-        <h2>{{ name }} {{ favoriteVisible === 'visible' ? '(Favourite)' : ''}}</h2>   <!--now because of props we can directly use the prop item-->
+        <h2>{{ name }} {{ isFavorite ? '(Favourite)' : ''}}</h2>   <!--now because of props we can directly use the prop item-->
         <button @click="toggleDetails()">{{ detailsVisible ? 'Hide' : 'Show'}} Details</button>
         <br>
         <br>
-        <button @click="toggleFavorite()">{{ favoriteVisible === '1' ? 'Unset' : 'Set'}} Favorite</button>
+        <button @click="toggleFavorite()">{{ isFavorite ? 'Unset' : 'Set'}} Favorite</button>
+        <br>
+        <br>
+        <button @click="delete1()">Delete</button>
         <ul v-if="detailsVisible">
-            <li><strong>Phone:</strong> {{ Number(phoneNumber) + 1}}</li>
+            <li><strong>Phone:</strong> {{ phoneNumber }}</li>
             <li><strong>Email:</strong> {{ emailAddress }}</li>
         </ul>
     </li>
@@ -22,6 +25,10 @@ export default {
     //     'isFavorite'
     //  ],
     props: {
+        id: {
+            type: String,
+            required: true
+        },
         name: {
             type: String,
             required: true
@@ -35,19 +42,22 @@ export default {
             required: true
         },
         isFavorite: {
-            type: String,
-            required: true,
-            default: 'notvisible',
-            validator: function isFav(value) {
-                return value === 'visible' || value === 'notvisible';
-            }
-        }
+            type: Boolean,
+            required: false,
+            // default: false
+        //     validator: function isFav(value) {
+        //         return value === 'visible' || value === 'notvisible';
+        //     }
+        },
 
     },
+
+    emits: ['friend-favourite', 'delete-contact'],        //this will tell which property we are emiting in the entire code which is at line 73
+
     data() {
         return {
             detailsVisible: false,
-            favoriteVisible: this.isFavorite
+            // favoriteVisible: this.isFavorite
             // emailaddressVisible: this.emailAddress
             
             // friend: {
@@ -63,12 +73,16 @@ export default {
             this.detailsVisible = !this.detailsVisible
         },
         toggleFavorite() {
-            if(this.favoriteVisible === 'visible'){
-                this.favoriteVisible = 'notvisible';
-            }
-            else{
-                this.favoriteVisible = 'visible';
-            }
+            this.$emit('friend-favourite', this.id)
+            // if(this.favoriteVisible === 'visible'){
+            //     this.favoriteVisible = 'notvisible';
+            // }
+            // else{
+            //     this.favoriteVisible = 'visible';
+            // }
+        },
+        delete1() {
+            this.$emit('delete-contact', this.id)
         }
     }
 };

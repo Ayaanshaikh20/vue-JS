@@ -4,18 +4,20 @@
     </header>
     <section>
         <!-- <h2>My Friends</h2> -->
+        <new-friend @add-contact="addContact">
+
+        </new-friend>
         <ul>
-            <friend-contact 
-                name="Ayaan Shaikh"
-                phone-number= "9594548987"
-                email-address="ayaanshaikh220301@gmail.com"
-                is-favorite= "visible">
-            </friend-contact>
-            <friend-contact 
-                name="Himanshu Khond"
-                phone-number= "5345345345"
-                email-address="Himanshu@gmail.com"
-                is-favorite="notvisible">
+            <friend-contact
+                v-for="friend in friends"
+                :key="friend.id"
+                :id="friend.id" 
+                :name="friend.name"
+                :phone-number= "friend.phone"
+                :email-address="friend.email"
+                :is-favorite= "friend.isFavorite"
+                @friend-favourite="friendFavouriteStatus"
+                @delete-contact="deleteContact">
             </friend-contact>
         </ul>
     </section>
@@ -28,20 +30,45 @@ export default {
   components: { FriendContact },
     data() {
         return {
-            // friends: [
-            //     {
-            //         id: 'Ayaan',
-            //         name: 'Ayaan Shaikh',
-            //         phone: '9594548987',
-            //         email: 'ayaanshaikh220301@gmail.com'
-            //     },
-            //     {
-            //         id: 'Himanshu',
-            //         name: 'Himanshu Khond',
-            //         phone: '9535454334',
-            //         email: 'himanshu.k@gmail.com'
-            //     }
-            // ]
+            friends: [
+                {
+                    id: 'Ayaan',
+                    name: 'Ayaan Shaikh',
+                    phone: '9594548987',
+                    email: 'ayaanshaikh220301@gmail.com',
+                    isFavorite: false
+                },
+                {
+                    id: 'Himanshu',
+                    name: 'Himanshu Khond',
+                    phone: '9535454334',
+                    email: 'himanshu.k@gmail.com',
+                    isFavorite: false
+                }
+            ]
+        }
+    },
+    methods : {
+      friendFavouriteStatus(FriendId) {
+        const identifiedFriend = this.friends.find((friend1) => friend1.id === FriendId)    //identifiedFriend returns true or false
+        // console.log(identifiedFriend)
+        identifiedFriend.isFavorite = !identifiedFriend.isFavorite
+        
+
+      },
+      addContact(name1, phone1, email1) {
+        const details = {
+          id: name1,
+          name: name1,
+          phone: phone1,
+          email: email1,
+          isFavorite: false
+        };
+        console.log(details)
+        this.friends.push(details);
+      },
+      deleteContact(indx) {
+            this.friends.splice(indx, 1)
         }
     }
 }
@@ -79,7 +106,8 @@ header {
   list-style: none;
 }
 
-#app li {
+#app li,
+#app form {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   margin: 1rem auto;
   border-radius: 10px;
@@ -112,4 +140,18 @@ header {
   border-color: #ec3169;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
 }
+
+#app input {
+  font: inherit;
+  padding: 0.15rem;
+}
+#app label {
+  font-weight: bold;
+  margin-right: 1rem;
+  width: 7rem;
+  display: inline-block;
+}
+#app form div {
+  margin: 1rem 0;
+}  
 </style>
