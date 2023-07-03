@@ -4,12 +4,14 @@
       :topic-title="activeTopic && activeTopic.title"
       :text="activeTopic && activeTopic.fullText"
     ></active-element>
-    <knowledge-base :topics="topics" @select-topic="activateTopic"></knowledge-base>
+    <knowledge-base @select-topic="activateTopic"></knowledge-base>
   </div>
 </template>
 
 <script>
 export default {
+  
+  
   data() {
     return {
       topics: [
@@ -32,6 +34,20 @@ export default {
       activeTopic: null,
     };
   },
+
+
+//Provide and inject can only work in parent child relationship.
+//This provide contains duplicate array of objects which is topics so 
+//we will convert provide in method and return this.topics
+  provide() {
+    return {
+      topicsArray: this.topics,
+      selectTopic: this.activateTopic
+    }
+  },
+
+
+  
   methods: {
     activateTopic(topicId) {
       this.activeTopic = this.topics.find((topic) => topic.id === topicId);
