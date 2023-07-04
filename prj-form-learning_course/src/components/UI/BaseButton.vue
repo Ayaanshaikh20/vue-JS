@@ -1,15 +1,14 @@
 <template>
-    <button :type="type" :class="mode">Delete</button>
+  <button :class="mode">
+    <slot></slot>
+  </button>
 </template>
 
 <script>
-// import BaseCard from './BaseCard.vue';
 export default {
-    props: ['type', 'mode'],
-    // components: {'base-card': BaseCard}
+  props: ['mode']
 }
 </script>
-
 
 <style scoped>
 button {
