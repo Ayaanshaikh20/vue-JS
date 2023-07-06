@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  props: ['modelValue'],
+  props: ['modelValue', 'name'],
   emits: ['update:modelValue'],
   // data() {
   //   return {
@@ -26,9 +26,13 @@ export default {
   //     return this.modelValue;
   //   }
   // },
+  mounted(){
+    console.log(this.modelValue , "model" , this.name)
+  },
   methods: {
     activate(option) {
       this.$emit('update:modelValue', option);
+      // this.modelValue = option
     },
   },
 };

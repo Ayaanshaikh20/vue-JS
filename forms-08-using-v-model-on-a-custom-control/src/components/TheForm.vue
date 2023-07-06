@@ -60,7 +60,7 @@
       </div>
     </div>
     <div class="form-control">
-      <rating-control v-model="rating"></rating-control>
+      <rating-control v-model="rating" :name="name"></rating-control>
     </div>
     <div class="form-control">
       <input type="checkbox" id="confirm-terms" name="confirm-terms" v-model="confirm" />
@@ -81,6 +81,7 @@ export default {
   },
   data() {
     return {
+      name:'Ayaan Shaikh',
       userName: '',
       userAge: null,
       referrer: 'wom',
