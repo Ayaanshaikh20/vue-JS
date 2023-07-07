@@ -11,7 +11,7 @@
           <p class="para" :id="taskindex" :class="{active: todo.iscompleted}">{{ todo.taskname }}</p>
           <button class="Edit" @click="editTask(todo.taskname, taskindex)">Edit</button>
           <button class="delete" @click="removeTask(taskindex)">Remove</button>
-          <button class="completed" @click="completedTask(todo.taskname)" ref="clickvalue">Completed</button>
+          <button class="completed" @click="completedTask(todo.taskname)" ref="clickvalue">{{ todo.iscompleted ? 'Incompleted' : 'Completed'}}</button>
         </li>
       </ul>
   </div>
@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       task: '',
-      todos: []
+      todos: [],
     }
   },
   methods: {
