@@ -7,11 +7,11 @@
         <button id="addButton" @click="addtask()">Add</button>
       </div>
       <ul class="todolist" id="todoList">
-        <li class="todostask" v-for="(todo, taskindex) in todos" :key="todo">
-          <p class="para" :id="id" :class="{active: completed === todo}">{{ todo }}</p>
-          <button class="Edit" @click="editTask(todo, taskindex)">Edit</button>
+        <li class="todostask" v-for="(todo, taskindex) in todos" :key="taskindex">
+          <p class="para" :id="taskindex" :class="{active: todo.iscompleted}">{{ todo.taskname }}</p>
+          <button class="Edit" @click="editTask(todo.taskname, taskindex)">Edit</button>
           <button class="delete" @click="removeTask(taskindex)">Remove</button>
-          <button class="completed" @click="completedTask(todo)" ref="clickvalue">Completed</button>
+          <button class="completed" @click="completedTask(todo.taskname)" ref="clickvalue">Completed</button>
         </li>
       </ul>
   </div>
@@ -23,21 +23,35 @@ export default {
   data() {
     return {
       task: '',
-      todos: null,
-      id: 0,
-      edittask: '',
-      activeline: false,
-      iscompleted:false
+      todos: [{
+        taskid:'Ayaan',
+        taskname: 'Ayaan',
+        iscompleted: false
+      },
+      {
+        taskid:'himanshu',
+        taskname: 'himanshu',
+        iscompleted: false
+      }],
+      // id: 0,
+      // edittask: '',
+      // activeline: false,
+      // iscompleted:false
     }
   },
   methods: {
     addtask() {
       // this.task = this.$refs.inputbox.value
-      if(this.todos === null){
-        this.todos = []
-      }
-      this.todos.push(this.task.trim())
-      this.id = this.id + 1
+      // if(this.todos === null){
+      //   this.todos = []
+      // }
+      const details = {
+        taskid: this.task,
+        taskname: this.task,
+        iscompleted: false  
+      }  
+      this.todos.push(details)
+      console.log(this.todos.iscompleted, 'this is iscompleted')
       console.log(this.todos)
       console.log(this.task)
       this.task = ''
@@ -62,7 +76,8 @@ export default {
       }  
     },
     completedTask(todo) {
-      this.completed = todo
+      const completedtask = this.todos.find((Todo) => Todo.taskname === todo)
+      completedtask.iscompleted = !completedtask.iscompleted
     }
   }
 }

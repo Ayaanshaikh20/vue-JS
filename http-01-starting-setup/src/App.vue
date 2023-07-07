@@ -18,12 +18,14 @@ export default {
     };
   },
   methods: {
-    storeSurvey(surveyData) {
-      const surveyResult = {
-        name: surveyData.userName,
-        rating: surveyData.rating,
+    storeSurvey(Name, Rating) {         //USING IN LINE 2
+      const surveyResult = {                        //OBJECT TO BE ADDED IN SAVEDSURVEYRESULTS
+        name: Name,                     //Name has this.enteredname
+        rating: Rating,                 //Rating has this.chosenRating
         id: new Date().toISOString(),
       };
+      console.log(surveyResult.name)
+      console.log()
       this.savedSurveyResults.push(surveyResult);
       console.log(surveyResult);
     },

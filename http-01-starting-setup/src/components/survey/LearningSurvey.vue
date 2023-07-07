@@ -5,7 +5,7 @@
       <form @submit.prevent="submitSurvey">
         <div class="form-control">
           <label for="name">Your Name</label>
-          <input type="text" id="name" name="name" v-model.trim="enteredName" />
+          <input type="text" id="name" name="name" v-model="enteredName" />   <!--tried using v-ref and its working-->
         </div>
         <h3>My learning experience was ...</h3>
         <div class="form-control">
@@ -13,13 +13,7 @@
           <label for="rating-poor">Poor</label>
         </div>
         <div class="form-control">
-          <input
-            type="radio"
-            id="rating-average"
-            value="average"
-            name="rating"
-            v-model="chosenRating"
-          />
+          <input type="radio" id="rating-average" value="average" name="rating" v-model="chosenRating"/>
           <label for="rating-average">Average</label>
         </div>
         <div class="form-control">
@@ -50,15 +44,16 @@ export default {
   methods: {
     submitSurvey() {
       if (this.enteredName === '' || !this.chosenRating) {
+        console.log()
         this.invalidInput = true;
         return;
       }
       this.invalidInput = false;
 
-      this.$emit('survey-submit', {
-        userName: this.enteredName,
-        rating: this.chosenRating,
-      });
+      this.$emit('survey-submit', 
+        this.enteredName,
+        this.chosenRating,
+      );
 
       this.enteredName = '';
       this.chosenRating = null;
