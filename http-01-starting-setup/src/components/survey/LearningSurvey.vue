@@ -20,9 +20,8 @@
           <input type="radio" id="rating-great" value="great" name="rating" v-model="chosenRating" />
           <label for="rating-great">Great</label>
         </div>
-        <p
-          v-if="invalidInput"
-        >One or more input fields are invalid. Please check your provided data.</p>
+        <p v-if="invalidInput">One or more input fields are invalid. Please check your provided data.</p>
+        <p v-if="iserror">{{ iserror }}</p>
         <div>
           <base-button>Submit</base-button>
         </div>
@@ -32,12 +31,14 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
       enteredName: '',
       chosenRating: null,
       invalidInput: false,
+      iserror: null
     };
   },
   emits: ['survey-submit'],
@@ -50,10 +51,28 @@ export default {
       }
       this.invalidInput = false;
 
-      this.$emit('survey-submit', 
-        this.enteredName,
-        this.chosenRating,
-      );
+      // this.$emit('survey-submit', this.enteredName, this.chosenRating);
+      //using normal fetch
+      
+      
+      // fetch('https://vue-http-request-a2b7a-default-rtdb.firebaseio.com/servey.json', {
+      //   method: 'POST',
+      //   headers: {'Content-type' : 'application/json'},
+      //   body: JSON.stringify({name: this.enteredName,rating: this.chosenRating})
+      // })
+
+      //with Axios, you have to write less code. It automatically sets the Content-Type header for you, it also automatically converts the body data to JSON.
+      this.iserror = null
+      axios.post('https://vue-http-request-a2b7a-default-rtdb.firebaseio.com/servey.json',{name:this.enteredName, rating: this.chosenRating})
+      .then((response) => {
+        if(response.status == 200) {
+          console.log('okay')
+        }else{
+          throw new Error('Data could not be saved')
+        }
+      }).catch((error) => {
+        console.log(error)
+      })
 
       this.enteredName = '';
       this.chosenRating = null;
