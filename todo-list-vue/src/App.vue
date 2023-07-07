@@ -23,29 +23,11 @@ export default {
   data() {
     return {
       task: '',
-      // todos: [{
-      //   taskid:'Ayaan',
-      //   taskname: 'Ayaan',
-      //   iscompleted: false
-      // },
-      // {
-      //   taskid:'himanshu',
-      //   taskname: 'himanshu',
-      //   iscompleted: false
-      // }],
       todos: []
-      // id: 0,
-      // edittask: '',
-      // activeline: false,
-      // iscompleted:false
     }
   },
   methods: {
     addtask() {
-      // this.task = this.$refs.inputbox.value
-      // if(this.todos === null){
-      //   this.todos = []
-      // }
       if (this.task === '') {
         this.isempty = true;
         alert('Please add some task')
