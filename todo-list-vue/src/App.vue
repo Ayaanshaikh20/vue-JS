@@ -23,16 +23,17 @@ export default {
   data() {
     return {
       task: '',
-      todos: [{
-        taskid:'Ayaan',
-        taskname: 'Ayaan',
-        iscompleted: false
-      },
-      {
-        taskid:'himanshu',
-        taskname: 'himanshu',
-        iscompleted: false
-      }],
+      // todos: [{
+      //   taskid:'Ayaan',
+      //   taskname: 'Ayaan',
+      //   iscompleted: false
+      // },
+      // {
+      //   taskid:'himanshu',
+      //   taskname: 'himanshu',
+      //   iscompleted: false
+      // }],
+      todos: []
       // id: 0,
       // edittask: '',
       // activeline: false,
@@ -45,6 +46,13 @@ export default {
       // if(this.todos === null){
       //   this.todos = []
       // }
+      if (this.task === '') {
+        this.isempty = true;
+        alert('Please add some task')
+        return
+      }
+      else{
+        this.isempty = false;
       const details = {
         taskid: this.task,
         taskname: this.task,
@@ -55,9 +63,7 @@ export default {
       console.log(this.todos)
       console.log(this.task)
       this.task = ''
-      
-      
-      
+      }
     },
     editTask(edittask, index) {
       if(this.todos.length != 0){
