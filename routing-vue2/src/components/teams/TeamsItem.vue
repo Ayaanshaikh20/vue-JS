@@ -12,7 +12,7 @@
     computed: {
         teammembersLink() {
             console.log("here")
-            return {name: 'teamMember', params: {teamId: this.id}}
+            return {name: 'teamMember', params: {teamId: this.id}, query: {sort: 'asc'}}
         }
     }
   };
