@@ -4,12 +4,12 @@
         <ul>
           <li>
             <router-link to="/teams">
-              <button>Teams</button>
+              Teams
             </router-link>
           </li>
           <li>
             <router-link to="/users">
-              <button>Users</button>
+              Users
             </router-link>
           </li>
         </ul>
@@ -44,7 +44,7 @@
     margin: 0 2rem;
   }
   
-  button {
+  a {
     font: inherit;
     background: transparent;
     border: 1px solid transparent;
@@ -54,8 +54,16 @@
     display: inline-block;
   }
   
-  button:hover,
-  button:active {
+  /* button:hover,
+  button:active{
+    color: #f1a80a;
+    border-color: #f1a80a;
+    background-color: #1a037e;
+  } */
+
+  a:hover,
+  a:active,
+  a.active{
     color: #f1a80a;
     border-color: #f1a80a;
     background-color: #1a037e;

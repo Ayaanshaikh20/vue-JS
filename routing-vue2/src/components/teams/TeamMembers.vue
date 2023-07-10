@@ -9,6 +9,8 @@
           :role="member.role"
         ></user-item>
       </ul>
+      <button @click="comeback()">Back</button>
+      <router-link to="/teams/t2">Go to team 2</router-link>
     </section>
   </template>
   
@@ -16,18 +18,49 @@
   import UserItem from '../users/UserItem.vue';
   
   export default {
+    inject: ['users', 'teams'],
+    props: ['teamId'],
     components: {
       UserItem
     },
     data() {
       return {
-        teamName: 'Test',
-        members: [
-          { id: 'u1', fullName: 'Max Schwarz', role: 'Engineer' },
-          { id: 'u2', fullName: 'Max Schwarz', role: 'Engineer' },
-        ],
+        // teamName: 'Test',
+        // members: [
+        //   { id: 'u1', fullName: 'Max Schwarz', role: 'Engineer' },
+        //   { id: 'u2', fullName: 'Max Schwarz', role: 'Engineer' },
+        // ],
+        teamName: '',
+        members: []
       };
     },
+    methods: {
+      comeback() {
+        this.$router.push('/teams')
+      },
+      loadteams(teamId) {
+        const selectedTeams = this.teams.find(team => team.id === teamId)
+        const Members = selectedTeams.members
+        console.log(Members)
+        const selectedMembers = []
+      for(let member in Members) {
+        const selecteduser = this.users.find(user => user.id === Members[member])
+        selectedMembers.push(selecteduser)
+      }
+      this.members = selectedMembers
+      this.teamName = selectedTeams.name
+      }
+    },
+
+
+    created() {
+      this.loadteams(this.teamId)
+    },
+    watch: {
+      teamId(newId) {
+        this.loadteams(newId)
+      }
+    }
   };
   </script>
   
@@ -49,4 +82,23 @@
     margin: 0;
     padding: 0;
   }
+
+  button {
+    font: inherit;
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    display: inline-block;
+    background-color: purple;
+  }
+
+  /* button:hover,
+  button:active,
+  button.active{
+    color: #f1a80a;
+    border-color: #f1a80a;
+    background-color: #1a037e;
+  } */
   </style>
