@@ -24,6 +24,7 @@ export default {
     return {
       task: '',
       todos: [],
+      isempty: false
     }
   },
   methods: {
