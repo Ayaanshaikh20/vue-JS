@@ -8,7 +8,7 @@
           :name="member.fullName"
           :role="member.role"
         ></user-item>
-      </ul>
+      </ul> 
       <button @click="comeback()">Back</button>
       <router-link to="/teams/t2">Go to team 2</router-link>
     </section>
@@ -56,11 +56,17 @@
     created() {
       this.loadteams(this.teamId)
     },
-    watch: {
-      teamId(newId) {
-        this.loadteams(newId)
-      }
-    }
+    BeforeRouteUpdate(to, next) {
+        console.log(to)
+        this.loadteams(to.params.teamId)
+        console.log(to.params)
+        next()
+      },
+    // watch: {
+    //   teamId(newId) {
+    //     this.loadteams(newId)
+    //   },
+    // }
   };
   </script>
   

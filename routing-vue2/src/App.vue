@@ -5,6 +5,9 @@
       <component :is="activePage"></component>
     </main> -->
     <router-view></router-view>
+    <footer>
+      <router-view name="footer"></router-view>
+    </footer>
   </div>
 </template>
 
