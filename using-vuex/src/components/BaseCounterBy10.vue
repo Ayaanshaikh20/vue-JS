@@ -10,7 +10,7 @@
             // add10() {
             //     this.$store.dispatch('increase', 10)
             // }
-            ...mapActions(['increase'])
+            ...mapActions('countermod',['increase'])
         }
     }
 </script>

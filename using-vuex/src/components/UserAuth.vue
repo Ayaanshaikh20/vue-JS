@@ -1,21 +1,25 @@
 <template>
     <div>
-        <button>Login</button>
-        <button>LogOut</button>
+        <button @click="login()" v-if="!userAuthenticated">Login</button>
+        <button @click="logout()" v-else>LogOut</button>
     </div>
 </template>
 
-<!-- 
+
 <script>
-// import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 export default {
-    // methods: {
-    //     isauth(){
-    //         this.$store.commit('isAuthenticated')
-    //         console.log(this.$store.commit('isAuthenticated'))
-    //     }
-    //     // ...mapMutations(['isAuthenticated'])
+    methods: {
+        // isauth(){
+        //     this.$store.commit('isAuthenticated', {isAuth : true})
+        // }
+        ...mapActions('authmod',['login']),
+        ...mapActions('authmod',['logout'])
         
-    // }
+    },
+    computed: {
+        ...mapGetters('authmod',['userAuthenticated'])
+  }
 }
-</script> -->
+</script>

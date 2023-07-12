@@ -1,6 +1,6 @@
 <template>
   <div>
-    <base-container title="Vuex">
+    <base-container title="Vuex" v-if="userAuthenticated">
     <!-- <h3>{{ this.$store.state.counter }}</h3> -->
       <base-counter></base-counter>
       <favourite-value></favourite-value>
@@ -20,6 +20,7 @@ import BaseCounterBy10 from './components/BaseCounterBy10.vue';
 import FavouriteValue from './components/FavouriteValue.vue';
 import UserAuth from './components/UserAuth.vue'
 import { mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 export default {
   components: {
     BaseContainer,
@@ -33,7 +34,10 @@ export default {
     //   this.$store.dispatch('increment', 5) //commit is built in method which takes increment from store.js
     // }                                // 10 is coming from payload
     
-      ...mapActions(['increment'])
+      ...mapActions('countermod',['increment'])
+  },
+  computed: {
+        ...mapGetters('authmod',['userAuthenticated'])
   }
 };
 </script>

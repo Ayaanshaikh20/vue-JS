@@ -11,7 +11,7 @@ export default {
         // counter() {
         //     return this.$store.getters.finalCounter
         // }      
-        ...mapGetters(['finalCounter'])             //alternate method of the commented computed method
+        ...mapGetters('countermod',['finalCounter'])             //alternate method of the commented computed method
     }
 };
 </script>

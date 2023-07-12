@@ -1,25 +1,24 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
-export default new Vuex.Store({
-    state: {            //State is basically similar to data which we used in vue
-        counter: 0,
-        isAuth: false
-      },
-    
+
+
+const counterModule = {
+    namespaced: true,
+    state() {
+        return {
+            counter: 0
+        }
+    },
     mutations: {
         increment(state, payload) {         //state1 will directly contain state method which is builtin from vuex //state1 and payload name is upto me
             state.counter = state.counter + payload
         },
         increase(state, payload) {
             state.counter = state.counter + payload
-        },
-        isAuthenticated(state) {
-            state.isAuth = true
         }
     },
-
-    actions: {              //actions are allowed to run asynchronusly
+    actions: {
         increment(context, payload) {
             setTimeout(function() {
                 context.commit('increment', payload)
@@ -31,7 +30,6 @@ export default new Vuex.Store({
             },2000)
         }
     },
-
     getters: {
         finalCounter(state) {
             return state.counter * 2
@@ -44,9 +42,42 @@ export default new Vuex.Store({
                 return 100
             }else{
                 return finalCounter1
-            }
-            
-            
+            }    
+        },
+    }
+}
+
+const authModule = {
+    namespaced: true,
+    state: {            //State is basically similar to data which we used in vue
+        isAuth: false
+      },
+    
+    mutations: {
+        isAuthenticated(state, payload) {
+            state.isAuth = payload.isAuth
         }
+    },
+
+    actions: {              //actions are allowed to run asynchronusly
+        login(context) {
+            context.commit('isAuthenticated', {isAuth: true})
+        },
+        logout(context) {
+            context.commit('isAuthenticated', {isAuth: false})
+        }
+    },
+
+    getters: {
+        userAuthenticated(state) {
+            return state.isAuth;
+        }
+    }
+}
+
+export default new Vuex.Store({
+    modules: {
+        countermod: counterModule,
+        authmod: authModule
     }
 }) 
